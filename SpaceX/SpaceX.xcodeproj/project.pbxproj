@@ -25,10 +25,17 @@
 		C402F97C2EF9C2EC006F8BE3 /* Exceptions for "SpaceX" folder in "SpaceXTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Features/RocketDetail/Data/Entity/RocketDetailDTO.swift,
+				Features/RocketDetail/Data/RocketDetailRepository.swift,
+				Features/RocketDetail/UseCase/Entity/RocketDetail.swift,
+				Features/RocketDetail/UseCase/RocketDetailUseCase.swift,
+				Features/RocketDetail/View/RocketDetailViewModel.swift,
 				Features/RocketList/Data/RocketListRepository.swift,
 				Features/RocketList/UseCase/RocketListUseCase.swift,
 				Features/RocketList/View/RocketListViewModel.swift,
 				Networking/SpaceXService/SpaceXEndpoint.swift,
+				UI/RocketStageView.swift,
+				UI/ValueLabelView.swift,
 			);
 			target = C402F93E2EF9BA18006F8BE3 /* SpaceXTests */;
 		};

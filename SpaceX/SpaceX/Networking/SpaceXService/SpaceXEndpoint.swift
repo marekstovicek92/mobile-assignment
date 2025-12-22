@@ -9,14 +9,14 @@ import Foundation
 
 enum SpaceXEndpoint: APIEndpoint {
     case list
-    case detail
+    case detail(String)
 
     var path: String {
         switch self {
         case .list:
             return "/v4/rockets"
-        case .detail:
-            return ""
+        case .detail(let id):
+            return "/v4/rockets/\(id)"
         }
     }
 

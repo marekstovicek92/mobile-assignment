@@ -34,23 +34,36 @@ struct RocketListView: View {
 
     private func contentView(for data: [Content]) -> some View {
         List(data) { row in
-            NavigationLink(value: row) {
-                HStack(alignment: .center) {
-                    Image(.rocket)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 25)
-                    VStack(alignment: .leading) {
-                        Text(row.rocketName)
-                            .font(.system(size: 14, weight: .bold))
-                        Text("First flight: \(row.firstFlightDate)")
-                    }
+            HStack(alignment: .center) {
+                Image(.rocket)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 25)
+                VStack(alignment: .leading) {
+                    Text(row.rocketName)
+                        .font(.system(size: 14, weight: .bold))
+                    Text("First flight: \(row.firstFlightDate)")
                 }
+            }
+            .onTapGesture {
+                viewModel.selectedRocketId = row.id
             }
         }
         .navigationTitle("Rockets")
-        .navigationDestination(for: Content.self) { content in
-            RocketDetailView()
+        .navigationDestination(item: $viewModel.selectedRocketId) { id in
+            RocketDetailView(
+                viewModel: RocketDetailViewModel(
+                    rocketId: id,
+                    loadRocketDetail: RocketDetailUseCase(
+                        repository: RocketDetailRepository(
+                            apiClient: APIClient(
+                                // TODO: Inject from some DI container
+                                baseURL: URL(string: "https://api.spacexdata.com")
+                            )
+                        )
+                    )
+                )
+            )
         }
     }
 }
