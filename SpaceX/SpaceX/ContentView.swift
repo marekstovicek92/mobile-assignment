@@ -9,10 +9,18 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            RocketListView()
-        }
-        .padding()
+        RocketListView(
+            viewModel: RocketListViewModel(
+                loadRocketList: RocketListUseCase(
+                    repository: RocketListRepository(
+                        apiClient: APIClient(
+                            // TODO: Inject from some DI container
+                            baseURL: URL(string: "https://api.spacexdata.com")
+                        )
+                    )
+                )
+            )
+        )
     }
 }
 

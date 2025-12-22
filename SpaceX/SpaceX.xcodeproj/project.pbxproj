@@ -21,9 +21,25 @@
 		C402F93F2EF9BA18006F8BE3 /* SpaceXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		C402F97C2EF9C2EC006F8BE3 /* Exceptions for "SpaceX" folder in "SpaceXTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Features/RocketList/Data/RocketListRepository.swift,
+				Features/RocketList/UseCase/RocketListUseCase.swift,
+				Features/RocketList/View/RocketListViewModel.swift,
+				Networking/SpaceXService/SpaceXEndpoint.swift,
+			);
+			target = C402F93E2EF9BA18006F8BE3 /* SpaceXTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		C402F9342EF9BA17006F8BE3 /* SpaceX */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				C402F97C2EF9C2EC006F8BE3 /* Exceptions for "SpaceX" folder in "SpaceXTests" target */,
+			);
 			path = SpaceX;
 			sourceTree = "<group>";
 		};
