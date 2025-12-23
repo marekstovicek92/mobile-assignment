@@ -11,6 +11,7 @@ import Foundation
 final class RocketDetailViewModel {
 
     var state: State = .loading
+    var goToRocketLaunch: Bool = false
 
     private let loadRocketDetail: RocketDetailUseCaseProtocol
     private let locale: Locale

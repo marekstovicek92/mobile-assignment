@@ -90,10 +90,19 @@ struct RocketDetailView: View {
         .padding(.horizontal, 16)
         .navigationTitle(detail.name)
         .navigationBarTitleDisplayMode(.inline)
+        .navigationDestination(isPresented: $viewModel.goToRocketLaunch) {
+            RocketLaunchView(
+                viewModel: RocketLaunchViewModel(
+                    motionDetectionUseCase: MotionDetectionUseCase(
+                        repository: MotionDetectionRepository()
+                    )
+                )
+            )
+        }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    // TODO: Implement navigation to the launch screen
+                    viewModel.goToRocketLaunch = true
                 } label: {
                     Text("Launch")
                 }
