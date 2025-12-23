@@ -12,7 +12,7 @@ struct RocketDetailView: View {
     @State var viewModel: RocketDetailViewModel
 
     var body: some View {
-        NavigationStack {
+        Group {
             switch viewModel.state {
             case .loading:
                 ProgressView()
