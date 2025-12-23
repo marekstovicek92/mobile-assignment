@@ -50,8 +50,8 @@ struct RocketDetailDTO: Decodable {
 
 // MARK: - DimensionDTO
 struct DimensionDTO: Decodable {
-    let meters: Double
-    let feet: Double
+    let meters: Double?
+    let feet: Double?
 }
 
 // MARK: - MassDTO

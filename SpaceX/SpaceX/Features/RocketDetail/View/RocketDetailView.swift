@@ -40,8 +40,12 @@ struct RocketDetailView: View {
                     .padding(.top, 16)
                     .padding(.bottom, 8)
                 HStack {
-                    ValueLabelView(value: detail.height, label: "height")
-                    ValueLabelView(value: detail.diameter, label: "diameter")
+                    detail.height.map {
+                        ValueLabelView(value: $0, label: "height")
+                    }
+                    detail.diameter.map {
+                        ValueLabelView(value: $0, label: "diameter")
+                    }
                     ValueLabelView(value: detail.mass, label: "mass")
                 }
 
@@ -102,8 +106,8 @@ extension RocketDetailView {
     struct Content: Hashable {
         let name: String
         let description: String
-        let height: String
-        let diameter: String
+        let height: String?
+        let diameter: String?
         let mass: String
         let stages: [RocketStageView.Content]
         let images: [URL]?

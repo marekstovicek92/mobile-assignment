@@ -64,10 +64,11 @@ final class RocketDetailViewModel {
         }
     }
 
-    private func formatDistanceValue(_ distance: RocketDetail.Distance) -> String {
-        locale.measurementSystem == .metric ?
-        String(format: "%.0fm", distance.meters) :
-        String(format: "%.0fft", distance.feet)
+    private func formatDistanceValue(_ distance: RocketDetail.Distance) -> String? {
+        guard let meters = distance.meters, let feet = distance.feet else { return nil }
+        return locale.measurementSystem == .metric ?
+            String(format: "%.0fm", meters) :
+            String(format: "%.0fft", feet)
     }
 
     private func formatWeightValue(_ mass: RocketDetail.Weight) -> String {

@@ -18,8 +18,8 @@ struct RocketDetail {
     let images: [URL]?
 
     struct Distance {
-        let meters: Double
-        let feet: Double
+        let meters: Double?
+        let feet: Double?
     }
 
     struct Weight {
