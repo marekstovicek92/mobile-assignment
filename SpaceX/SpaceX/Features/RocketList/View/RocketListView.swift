@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-enum RocketListRouter: Hashable {
-    case detail(RocketListView.Content)
-}
-
 struct RocketListView: View {
 
     @State var viewModel: RocketListViewModel

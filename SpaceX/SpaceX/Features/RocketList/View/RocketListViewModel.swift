@@ -31,7 +31,7 @@ final class RocketListViewModel {
     }
 
     private func mapToContent(_ rocket: RocketOverview) -> RocketListView.Content {
-        return RocketListView.Content(
+        RocketListView.Content(
             id: rocket.id,
             rocketName: rocket.name,
             firstFlightDate: formatDate(rocket.firstFlight)
