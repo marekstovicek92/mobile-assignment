@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		C49D8E342EFB63860056CAA4 /* FactoryKit in Frameworks */ = {isa = PBXBuildFile; productRef = C49D8E332EFB63860056CAA4 /* FactoryKit */; };
+		C49D8E362EFB63860056CAA4 /* FactoryTesting in Frameworks */ = {isa = PBXBuildFile; productRef = C49D8E352EFB63860056CAA4 /* FactoryTesting */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		C402F9402EF9BA18006F8BE3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -36,6 +41,7 @@
 				Features/RocketLaunch/UseCase/MotionDetectionUseCase.swift,
 				Features/RocketLaunch/View/RocketLaunchViewModel.swift,
 				Features/RocketList/Data/RocketListRepository.swift,
+				Features/RocketList/DI/RocketListContainer.swift,
 				Features/RocketList/UseCase/RocketListUseCase.swift,
 				Features/RocketList/View/RocketListView.swift,
 				Features/RocketList/View/RocketListViewModel.swift,
@@ -69,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C49D8E342EFB63860056CAA4 /* FactoryKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C49D8E362EFB63860056CAA4 /* FactoryTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,6 +128,7 @@
 			);
 			name = SpaceX;
 			packageProductDependencies = (
+				C49D8E332EFB63860056CAA4 /* FactoryKit */,
 			);
 			productName = SpaceX;
 			productReference = C402F9322EF9BA17006F8BE3 /* SpaceX.app */;
@@ -143,6 +152,7 @@
 			);
 			name = SpaceXTests;
 			packageProductDependencies = (
+				C49D8E352EFB63860056CAA4 /* FactoryTesting */,
 			);
 			productName = SpaceXTests;
 			productReference = C402F93F2EF9BA18006F8BE3 /* SpaceXTests.xctest */;
@@ -176,6 +186,9 @@
 			);
 			mainGroup = C402F9292EF9BA17006F8BE3;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				C49D8E322EFB63860056CAA4 /* XCRemoteSwiftPackageReference "Factory" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = C402F9332EF9BA17006F8BE3 /* Products */;
 			projectDirPath = "";
@@ -490,6 +503,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C49D8E322EFB63860056CAA4 /* XCRemoteSwiftPackageReference "Factory" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Factory";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C49D8E332EFB63860056CAA4 /* FactoryKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C49D8E322EFB63860056CAA4 /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = FactoryKit;
+		};
+		C49D8E352EFB63860056CAA4 /* FactoryTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C49D8E322EFB63860056CAA4 /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = FactoryTesting;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C402F92A2EF9BA17006F8BE3 /* Project object */;
 }
