@@ -13,7 +13,13 @@ struct ContentView: View {
     let rocketListContainer = RocketListContainer()
 
     var body: some View {
-        rocketListContainer.rocketListView.resolve()
+        RocketListView(
+            viewModel: rocketListContainer.rocketListViewModel.resolve(),
+            router: RocketListRouter(
+                rocketDetailContainer: RocketDetailContainer(),
+                launchRocketContainer: LaunchRocketContainer()
+            )
+        )
     }
 }
 

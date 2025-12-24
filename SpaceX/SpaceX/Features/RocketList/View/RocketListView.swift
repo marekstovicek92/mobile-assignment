@@ -10,6 +10,7 @@ import SwiftUI
 struct RocketListView: View {
 
     @State var viewModel: RocketListViewModel
+    let router: RocketListRouter
 
     var body: some View {
         NavigationStack {
@@ -47,19 +48,7 @@ struct RocketListView: View {
         }
         .navigationTitle("Rockets")
         .navigationDestination(item: $viewModel.selectedRocketId) { id in
-            RocketDetailView(
-                viewModel: RocketDetailViewModel(
-                    rocketId: id,
-                    loadRocketDetail: RocketDetailUseCase(
-                        repository: RocketDetailRepository(
-                            apiClient: APIClient(
-                                // TODO: Inject from some DI container
-                                baseURL: URL(string: "https://api.spacexdata.com")
-                            )
-                        )
-                    )
-                )
-            )
+            router.makeRocketDetailView(with: id)
         }
     }
 }
@@ -76,6 +65,10 @@ extension RocketListView {
     RocketListView(
         viewModel: RocketListViewModel(
             loadRocketList: RocketListUseCaseMock()
+        ),
+        router: .init(
+            rocketDetailContainer: RocketDetailContainer(),
+            launchRocketContainer: LaunchRocketContainer()
         )
     )
 }

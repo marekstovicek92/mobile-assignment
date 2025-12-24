@@ -10,6 +10,7 @@ import SwiftUI
 struct RocketDetailView: View {
 
     @State var viewModel: RocketDetailViewModel
+    let router: RocketDetailRouter
 
     var body: some View {
         Group {
@@ -91,13 +92,7 @@ struct RocketDetailView: View {
         .navigationTitle(detail.name)
         .navigationBarTitleDisplayMode(.inline)
         .navigationDestination(isPresented: $viewModel.goToRocketLaunch) {
-            RocketLaunchView(
-                viewModel: RocketLaunchViewModel(
-                    motionDetectionUseCase: MotionDetectionUseCase(
-                        repository: MotionDetectionRepository()
-                    )
-                )
-            )
+            router.makeLaunchView()
         }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -128,6 +123,7 @@ extension RocketDetailView {
         viewModel: RocketDetailViewModel(
             rocketId: "",
             loadRocketDetail: RocketDetailUseCaseMock()
-        )
+        ),
+        router: RocketDetailRouter(launchRocketContainer: LaunchRocketContainer())
     )
 }

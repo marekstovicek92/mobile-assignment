@@ -13,7 +13,6 @@ final class RocketListContainer: ManagedContainer {
 }
 
 extension RocketListContainer {
-
     var rocketListRepository: Factory<RocketListRepositoryProtocol> {
         self { @MainActor in
             RocketListRepository(apiClient: APIClient(
@@ -35,12 +34,6 @@ extension RocketListContainer {
             RocketListViewModel(
                 loadRocketList: self.rocketListUseCase.resolve()
             )
-        }
-    }
-
-    var rocketListView: Factory<RocketListView> {
-        self { @MainActor in
-            RocketListView(viewModel: self.rocketListViewModel.resolve())
         }
     }
 }
