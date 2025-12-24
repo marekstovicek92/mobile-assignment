@@ -6,12 +6,22 @@
 //
 
 import SwiftUI
+import FactoryKit
 
 @main
 struct SpaceXApp: App {
+
+    let rocketListContainer = RocketListContainer()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RocketListView(
+                viewModel: rocketListContainer.rocketListViewModel.resolve(),
+                router: RocketListRouter(
+                    rocketDetailContainer: RocketDetailContainer(),
+                    launchRocketContainer: LaunchRocketContainer()
+                )
+            )
         }
     }
 }
