@@ -25,6 +25,7 @@ struct RocketLaunchView: View {
                                 viewModel.launchOffset = -proxy.size.height
                             }
                         }
+                    Text("Lauch successful!")
                 } else {
                     Image(.rocketIdle)
                         .resizable()
