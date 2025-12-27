@@ -11,14 +11,14 @@ import FactoryKit
 @main
 struct SpaceXApp: App {
 
-    let rocketListContainer = RocketListContainer()
+    let networkingContainer = NetworkingContainer()
 
     var body: some Scene {
         WindowGroup {
             RocketListView(
-                viewModel: rocketListContainer.rocketListViewModel.resolve(),
+                viewModel: RocketListContainer(networkingContainer: networkingContainer).rocketListViewModel.resolve(),
                 router: RocketListRouter(
-                    rocketDetailContainer: RocketDetailContainer(),
+                    rocketDetailContainer: RocketDetailContainer(networkingContainer: networkingContainer),
                     launchRocketContainer: LaunchRocketContainer()
                 )
             )

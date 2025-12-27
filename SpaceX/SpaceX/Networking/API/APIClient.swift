@@ -27,6 +27,11 @@ final class APIClient {
         self.urlSession = urlSession
     }
 
+    func data(for url: URL) async throws -> Data {
+        let (data, _ ) = try await urlSession.data(for: .init(url: url))
+        return data
+    }
+
     func data<T: Decodable>(for endpoint: APIEndpoint) async throws -> T {
         let request = try makeURLRequest(for: endpoint)
         let (data, _) = try await urlSession.data(for: request)

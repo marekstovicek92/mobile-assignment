@@ -7,23 +7,32 @@
 
 import Foundation
 
+struct RocketImageContent: Identifiable, Hashable {
+    let id: String
+    let data: Data
+}
+
 @Observable
 final class RocketDetailViewModel {
 
     var state: State = .loading
     var goToRocketLaunch: Bool = false
+    var imagesData: [RocketImageContent] = []
 
     private let loadRocketDetail: RocketDetailUseCaseProtocol
+    private let loadImages: LoadImageUseCaseProtocol
     private let locale: Locale
     private let rocketId: String
 
     init(
         rocketId: String,
         loadRocketDetail: RocketDetailUseCaseProtocol,
+        loadImages: LoadImageUseCaseProtocol,
         locale: Locale = .current
     ) {
         self.rocketId = rocketId
         self.loadRocketDetail = loadRocketDetail
+        self.loadImages = loadImages
         self.locale = locale
     }
 
@@ -59,8 +68,9 @@ final class RocketDetailViewModel {
                 images: detail.images
             )
             state = .loaded(content)
+            await processImages(for: content.images)
         } catch {
-            // TODO: Handle error
+            // Error handling. For example to show alert, fullscreen error view or some toast message about error
             state = .error(error)
         }
     }
@@ -98,6 +108,15 @@ final class RocketDetailViewModel {
                 : .init(value: mass.lb, unit: .pounds)
 
             return formatter.string(from: measurement)
+        }
+    }
+
+    @MainActor
+    private func processImages(for urls: [URL]?) async {
+        guard let urls else { return }
+        let stream = loadImages(for: urls)
+        for await image in stream {
+            imagesData.append(.init(id: image.url, data: image.data))
         }
     }
 }

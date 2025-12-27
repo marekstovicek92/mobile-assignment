@@ -20,7 +20,7 @@ struct RocketListView: View {
             case .loaded(let data):
                 contentView(for: data)
             case .error:
-                // TODO: Error handling
+                // Error handling. For example to show alert, fullscreen error view or some toast message about error
                 Text("Error")
             }
         }
@@ -67,7 +67,9 @@ extension RocketListView {
             loadRocketList: RocketListUseCaseMock()
         ),
         router: .init(
-            rocketDetailContainer: RocketDetailContainer(),
+            rocketDetailContainer: RocketDetailContainer(
+                networkingContainer: NetworkingContainer()
+            ),
             launchRocketContainer: LaunchRocketContainer()
         )
     )

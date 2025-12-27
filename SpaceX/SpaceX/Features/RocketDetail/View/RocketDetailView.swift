@@ -56,33 +56,14 @@ struct RocketDetailView: View {
                     )
                     .padding(.top, 16)
                 }
-
-                detail.images.map { images in
-                    VStack(alignment: .leading, spacing: .zero) {
-                        Text("Photos")
-                            .font(.system(size: 14, weight: .bold))
-                            .padding(.top, 16)
+                ForEach(viewModel.imagesData) { image in
+                    UIImage(data: image.data).map {
+                        Image(uiImage: $0)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxWidth: .infinity)
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
                             .padding(.bottom, 8)
-                        ForEach(images, id: \.absoluteString) { imageURL in
-                            AsyncImage(url: imageURL) { image in
-                                image
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(maxWidth: .infinity)
-                                    .clipShape(RoundedRectangle(cornerRadius: 8))
-                                    .padding(.bottom, 8)
-                            } placeholder: {
-                                Image(systemName: "photo.artframe")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(maxWidth: .infinity)
-                                    .overlay {
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .fill(.clear)
-                                    }
-                                    .padding(.bottom, 8)
-                            }
-                        }
                     }
                 }
             }
@@ -122,7 +103,10 @@ extension RocketDetailView {
     RocketDetailView(
         viewModel: RocketDetailViewModel(
             rocketId: "",
-            loadRocketDetail: RocketDetailUseCaseMock()
+            loadRocketDetail: RocketDetailUseCaseMock(),
+            loadImages: LoadImageUseCase(
+                repository: ImageRepository()
+            )
         ),
         router: RocketDetailRouter(launchRocketContainer: LaunchRocketContainer())
     )

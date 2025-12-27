@@ -10,15 +10,18 @@ import FactoryKit
 
 final class RocketDetailContainer: ManagedContainer {
     let manager = ContainerManager()
+    let networkingContainer: NetworkingContainer
+
+    init(networkingContainer: NetworkingContainer) {
+        self.networkingContainer = networkingContainer
+    }
 }
 
 extension RocketDetailContainer {
 
     var rocketDetailRepository: Factory<RocketDetailRepositoryProtocol> {
         self { @MainActor in
-            RocketDetailRepository(apiClient: APIClient(
-                baseURL: URL(string: "https://api.spacexdata.com")
-            ))
+            RocketDetailRepository(apiClient: self.networkingContainer.spaceXClient.resolve())
         }
     }
 
@@ -28,11 +31,18 @@ extension RocketDetailContainer {
         }
     }
 
+    var rocketImagesUseCase: Factory<LoadImageUseCaseProtocol> {
+        self { @MainActor in
+            LoadImageUseCase(repository: self.networkingContainer.imageRepository.resolve())
+        }
+    }
+
     var rocketDetailViewModel: ParameterFactory<String, RocketDetailViewModel> {
         self { @MainActor id in
             RocketDetailViewModel(
                 rocketId: id,
-                loadRocketDetail: self.rocketDetailUseCase.resolve()
+                loadRocketDetail: self.rocketDetailUseCase.resolve(),
+                loadImages: self.rocketImagesUseCase.resolve()
             )
         }
     }

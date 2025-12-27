@@ -10,14 +10,17 @@ import FactoryKit
 
 final class RocketListContainer: ManagedContainer {
     let manager = ContainerManager()
+    let networkingContainer: NetworkingContainer
+
+    init(networkingContainer: NetworkingContainer) {
+        self.networkingContainer = networkingContainer
+    }
 }
 
 extension RocketListContainer {
     var rocketListRepository: Factory<RocketListRepositoryProtocol> {
         self { @MainActor in
-            RocketListRepository(apiClient: APIClient(
-                baseURL: URL(string: "https://api.spacexdata.com")
-            ))
+            RocketListRepository(apiClient: self.networkingContainer.spaceXClient.resolve())
         }
     }
 
